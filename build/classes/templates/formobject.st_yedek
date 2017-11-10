@@ -1,0 +1,14 @@
+formobject(formObjects) ::= "
+<\n>
+<formObjects:{it|
+echo 'Backup <it.language> <it.formName>.fmb'
+cp $AU_TOP/forms/<it.language>/<it.formName>.fmb $AU_TOP/forms/<it.language>/<it.formName>_$CurrentDate.fmb
+
+echo 'Copy <it.language> <it.formName>.fmb'
+cp EBS/fmb/<it.language>/<it.formName>.fmb $AU_TOP/forms/<it.language>/<it.formName>.fmb
+
+cd $AU_TOP/forms/<it.language>
+echo 'Compile <it.language> <it.formName>.fmb'
+frmcmp_batch module=$AU_TOP/forms/<it.language>/<it.formName>.fmb userid=apps/$AppsPWD output_file=$XXTG_TOP/forms/<it.language>/<it.formName>.fmx
+cd $lCURRENTDIR
+<\n>}>"
